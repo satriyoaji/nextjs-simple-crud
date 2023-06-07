@@ -1,5 +1,5 @@
 # `Next.JS CRUD`
-> Next.js CRUD boilerplate made with Chakra-UI + Typescript + React-table + React-hook-form
+> Next.js simple CRUD boilerplate made with Chakra-UI + Typescript + React-table + React-hook-form
 
 ## Usage
 
