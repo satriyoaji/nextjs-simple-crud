@@ -7,7 +7,7 @@ import { MdCheck } from "react-icons/md";
 import schema from "./schema";
 
 type FormValues = {
-  name: string;
+  title: string;
 };
 
 type Props = {
@@ -20,7 +20,7 @@ function UsernameForm({ onSubmit, defaultValues, onEscapeKeypress }: Props) {
   const { handleSubmit, control, reset } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
-      name: "",
+      title: "",
       ...defaultValues,
     },
   });

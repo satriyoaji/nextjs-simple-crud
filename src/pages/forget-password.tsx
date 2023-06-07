@@ -20,9 +20,9 @@ function ForgetPassword() {
   const onSubmit: SubmitHandler<FormValues> = async (values) => {
     try {
       await api.post("reset-password", {
-        email: values.email,
+        description: values.description,
       });
-      setEmail(values.email);
+      setEmail(values.description);
       toast.success("E-mail sent successfully.");
     } catch (error: unknown) {
       httpErrorHandler(error, ref.current?.setError);

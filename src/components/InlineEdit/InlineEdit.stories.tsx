@@ -6,14 +6,14 @@ import InlineEdit from "./InlineEdit";
 
 export const Primary = () => {
   const [isEditing, { on, off }] = useBoolean();
-  const [form, setForm] = useState({ email: "santospatrick@email.com" });
+  const [form, setForm] = useState({ description: "santospatrick@email.com" });
 
   return (
     <>
       <InlineEdit
         isEditing={isEditing}
         onClickEdit={on}
-        value={form.email}
+        value={form.description}
         FormComponent={
           <InlineEditForm
             onSubmit={(values) => {

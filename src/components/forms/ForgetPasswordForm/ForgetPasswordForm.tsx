@@ -33,7 +33,7 @@ const ForgetPasswordForm: ForwardRefRenderFunction<
   } = useForm<FormValues>({
     resolver: yupResolver(schema),
     defaultValues: {
-      email: "",
+      description: "",
     },
   });
 

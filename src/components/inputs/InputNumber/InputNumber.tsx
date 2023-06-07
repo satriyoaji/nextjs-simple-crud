@@ -28,7 +28,7 @@ function InputNumber({
   const {
     field: { onChange, onBlur, value, ref },
     fieldState: { invalid, error },
-  } = useController({ name, control });
+  } = useController({ name: title, control });
 
   const separators = useMemo(() => {
     return brazilianCurrency

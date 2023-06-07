@@ -20,7 +20,7 @@ function UsernameForm({ onSubmit, defaultValues, onEscapeKeypress }: Props) {
   const { handleSubmit, control, reset } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
-      email: "",
+      description: "",
       ...defaultValues,
     },
   });

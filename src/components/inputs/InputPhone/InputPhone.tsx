@@ -22,7 +22,7 @@ function InputPhone({ label, name, control, helperText, ...rest }: Props) {
     field: { onChange, onBlur, value, ref },
     fieldState: { invalid, error },
   } = useController({
-    name,
+    name: title,
     control,
   });
 

@@ -1,5 +1,5 @@
 import {
-  Avatar,
+  // Avatar,
   Box,
   Drawer,
   DrawerBody,
@@ -63,11 +63,11 @@ function MainDrawer({ onClose, isOpen }: Props) {
             mt="auto"
           >
             <HStack spacing={4}>
-              <NextLink href="/me" passHref>
-                <a>
-                  <Avatar size="sm" />
-                </a>
-              </NextLink>
+              {/*<NextLink href="/me" passHref>*/}
+              {/*  <a>*/}
+              {/*    <Avatar size="sm" />*/}
+              {/*  </a>*/}
+              {/*</NextLink>*/}
               <Box
                 display="flex"
                 flexDirection="column"

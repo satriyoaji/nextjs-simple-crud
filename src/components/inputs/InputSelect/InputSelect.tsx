@@ -34,7 +34,7 @@ function InputAutocomplete({
   const {
     field: { onChange, onBlur, value, ref },
     fieldState: { invalid, error },
-  } = useController({ name, control });
+  } = useController({ name: title, control });
 
   const handleChange = (selectedOption: SelectedOption) => {
     onChange(selectedOption.value);

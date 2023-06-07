@@ -44,7 +44,7 @@ export const FormWithError = () => {
       // this is calling the wrong endpoint intentionally :)
       await api.post("register", {
         username: "lorem",
-        email: "admin@admin.com",
+        description: "admin@admin.com",
         password: "lorem",
         profile_id: 2,
       });

@@ -37,7 +37,7 @@ function InputUpload({
     field: { onChange, value = [], ref },
     fieldState: { invalid, error },
   } = useController({
-    name,
+    name: title,
     control,
   });
   const { getRootProps, getInputProps, isFocused, isDragAccept, isDragReject } =
@@ -52,7 +52,7 @@ function InputUpload({
     <ListItem
       borderBottomWidth={list.length - 1 === index ? undefined : "1px"}
       borderBottomColor="gray.200"
-      key={file.name}
+      key={file.title}
     >
       <Box
         rounded={"md"}
@@ -63,7 +63,7 @@ function InputUpload({
         mb={4}
       >
         <ListIcon as={MdCheckCircle} color="green.500" />
-        {file.name} -{" "}
+        {file.title} -{" "}
         <Box ml={1} fontWeight="bold">
           <Numeral value={file.size} format={"0.0 b"} />
         </Box>

@@ -4,39 +4,40 @@ import { Container } from "@chakra-ui/react";
 import React, { ReactElement, useRef } from "react";
 import { NextPageWithLayout } from "../_app";
 import api, { getAPIClient, httpErrorHandler } from "@/services/api";
-import { UserData } from "@/typings/user";
-import UserForm from "@/components/forms/UserForm";
+import { NoteData } from "@/typings/note";
+import NoteForm from "@/components/forms/NoteForm";
 import { SubmitHandler } from "react-hook-form";
-import { FormValues } from "@/components/forms/UserForm";
+import { FormValues } from "@/components/forms/NoteForm";
 import { toast } from "react-toastify";
 import omit from "lodash.omit";
 import { removeEmptyValues } from "@/utils/parse";
-import { UserFormRefType } from "@/components/forms/UserForm/UserForm";
+import { NoteFormRefType } from "@/components/forms/NoteForm/NoteForm";
+import {useRouter} from "next/router";
 
 type Props = {
-  data: UserData;
+  data: NoteData;
 };
 
-const UserId: NextPageWithLayout<Props> = ({ data }) => {
-  const formRef = useRef<UserFormRefType>(null);
+const NoteId: NextPageWithLayout<Props> = ({ data }) => {
+  const router = useRouter();
+  const formRef = useRef<NoteFormRefType>(null);
 
   const onSubmit: SubmitHandler<FormValues> = async (values) => {
     removeEmptyValues(values);
     const apiValues = omit(values, ["id", "created_at", "confirmPassword"]);
     try {
-      await api.put(`/users/${values.id}`, apiValues);
+      await api.put(`/notes/${values.id}`, apiValues);
+      router.push("/notes");
     } catch (error) {
       httpErrorHandler(error, formRef.current?.setError);
     }
     toast.success("Data edited successfully!");
-    formRef.current?.setValue("password", "");
-    formRef.current?.setValue("confirmPassword", "");
     (document.activeElement as HTMLElement).blur();
   };
 
   return (
     <Container maxW="1400px" m="auto" py={10}>
-      <UserForm ref={formRef} onSubmit={onSubmit} defaultValues={data} />
+      <NoteForm ref={formRef} onSubmit={onSubmit} defaultValues={data} />
     </Container>
   );
 };
@@ -44,17 +45,15 @@ const UserId: NextPageWithLayout<Props> = ({ data }) => {
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const id = ctx.query.id;
   const api = getAPIClient(ctx);
-  const { data } = await api.get(`users/${id}`);
+  const { data } = await api.get(`notes/${id}`);
 
   return {
-    props: {
-      data,
-    },
+    props: data,
   };
 };
 
-UserId.getLayout = (page: ReactElement) => {
+NoteId.getLayout = (page: ReactElement) => {
   return <PrivatePage>{page}</PrivatePage>;
 };
 
-export default UserId;
+export default NoteId;

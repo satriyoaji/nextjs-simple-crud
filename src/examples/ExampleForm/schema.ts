@@ -16,7 +16,7 @@ const SUPPORTED_FORMATS = [
 
 const schema = Yup.object({
   name: Yup.string().required(),
-  email: Yup.string().email().required(),
+  email: Yup.string().description().required(),
   birthdate: Yup.date().required(),
   documents: Yup.array()
     .of(

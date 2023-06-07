@@ -22,23 +22,23 @@ export const menu: MenuItem[] = [
   },
   {
     icon: MdSupervisedUserCircle,
-    text: "Users",
+    text: "Notes",
     children: [
       {
         text: "Listing",
-        href: "/users",
+        href: "/notes",
         icon: MdList,
       },
       {
         text: "Create",
-        href: "/users/new",
+        href: "/notes/new",
         icon: MdAdd,
       },
     ],
   },
-  {
-    icon: MdVerifiedUser,
-    href: "/me",
-    text: "Profile",
-  },
+  // {
+  //   icon: MdVerifiedUser,
+  //   href: "/me",
+  //   text: "Profile",
+  // },
 ];

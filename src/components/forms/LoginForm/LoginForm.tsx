@@ -35,7 +35,7 @@ const LoginForm: ForwardRefRenderFunction<LoginFormRefType, Props> = (
   } = useForm<FormValues>({
     resolver: yupResolver(schema),
     defaultValues: {
-      email: "",
+      description: "",
       password: "",
     },
   });

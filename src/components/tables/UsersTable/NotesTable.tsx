@@ -16,7 +16,7 @@ import { SubmitHandler } from "react-hook-form";
 import { FormValues } from "@/components/forms/UsersFilterForm/UsersFilterForm";
 import InlineEdit from "@/components/InlineEdit";
 
-function UsersTable() {
+function NotesTable() {
   const perPage = 5;
   const [page, setPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
@@ -27,20 +27,20 @@ function UsersTable() {
   const [applitedFilters, setApplitedFilters] = useState({});
   const queryClient = useQueryClient();
   const { mutateAsync, isLoading: isLoadingDeletion } = useMutation(() =>
-    api.delete(`/users/${idToDelete}`)
+    api.delete(`/notes/${idToDelete}`)
   );
 
   const {
-    data: users,
+    data: notes,
     isLoading,
     error,
-  } = useQuery(["user", page, searchTerm, applitedFilters], () =>
+  } = useQuery(["note", page, searchTerm, applitedFilters], () =>
     api
-      .get("users", {
+      .get("notes/paged", {
         params: {
           q: searchTerm,
           page,
-          perPage,
+          size: perPage,
           order: "created_at",
           status: true,
           ...applitedFilters,
@@ -57,71 +57,71 @@ function UsersTable() {
   const columns = useMemo(
     () => [
       {
-        Header: "Name",
-        accessor: "name",
-        Cell: (data: any) => (
-          <InlineEdit
-            isEditing={currentCell === data.cell.row.original.id}
-            onClickEdit={() => {
-              setCurrentCell(data.cell.row.original.id);
-              setCurrentText(data.value);
-            }}
-            value={data.value}
-            FormComponent={
-              <NameForm
-                onSubmit={(values) => {
-                  api
-                    .put(`users/${currentCell}`, {
-                      name: values.name,
-                    })
-                    .catch(() => {
-                      toast.error("Couldn't edit user, try again later");
-                    });
-                  queryClient.setQueryData(
-                    ["user", page, searchTerm, applitedFilters],
-                    (old: Partial<UserResponse> | undefined) => {
-                      return {
-                        ...old,
-                        data: old?.data?.map((data) =>
-                          data.id === currentCell
-                            ? { ...data, name: values.name }
-                            : data
-                        ),
-                      };
-                    }
-                  );
-                  setCurrentCell(null);
-                  setCurrentText("");
-                }}
-                defaultValues={{ name: currentText }}
-                onEscapeKeypress={onEscapeKeypress}
-              />
-            }
-          />
-        ),
+        Header: "Title",
+        accessor: "title",
+        // Cell: (data: any) => (
+        //   <InlineEdit
+        //     isEditing={currentCell === data.cell.row.original.id}
+        //     onClickEdit={() => {
+        //       setCurrentCell(data.cell.row.original.id);
+        //       setCurrentText(data.value);
+        //     }}
+        //     value={data.value}
+        //     FormComponent={
+        //       <NameForm
+        //         onSubmit={(values) => {
+        //           api
+        //             .put(`notes/${currentCell}`, {
+        //               title: values.title,
+        //             })
+        //             .catch(() => {
+        //               toast.error("Couldn't edit note, try again later");
+        //             });
+        //           queryClient.setQueryData(
+        //             ["note", page, searchTerm, applitedFilters],
+        //             (old: Partial<UserResponse> | undefined) => {
+        //               return {
+        //                 ...old,
+        //                 data: old?.data?.map((data) =>
+        //                   data.id === currentCell
+        //                     ? { ...data, title: values.title }
+        //                     : data
+        //                 ),
+        //               };
+        //             }
+        //           );
+        //           setCurrentCell(null);
+        //           setCurrentText("");
+        //         }}
+        //         defaultValues={{ title: currentText }}
+        //         onEscapeKeypress={onEscapeKeypress}
+        //       />
+        //     }
+        //   />
+        // ),
       },
       {
-        Header: "Email",
-        accessor: "email",
+        Header: "Description",
+        accessor: "description",
       },
       {
         Header: "Created at",
-        accessor: (row: { createdAt: string }) =>
-          format(parseISO(row.createdAt), "Pp"),
-        id: "createdAt",
+        accessor: (row: { created_at: string }) =>
+          format(parseISO(row.created_at), "Pp"),
+        id: "created_at",
       },
       {
         Header: "Actions",
         Cell: (data: any) => (
           <HStack>
-            <Link href={`/users/${data.cell.row.original.id}`} passHref>
+            <Link href={`/notes/${data.cell.row.original.id}`} passHref>
               <IconButton
-                aria-label={"Edit user"}
+                aria-label={"Edit note"}
                 icon={<MdArrowRightAlt size={22} />}
               />
             </Link>
             <IconButton
-              aria-label={"Edit user"}
+              aria-label={"Edit note"}
               onClick={() => {
                 setIdToDelete(data.cell.row.original.id);
               }}
@@ -148,7 +148,7 @@ function UsersTable() {
 
   const onConfirmDeletion = async () => {
     await mutateAsync();
-    queryClient.invalidateQueries(["user", page, searchTerm]);
+    queryClient.invalidateQueries(["note", page, searchTerm]);
     setIdToDelete(null);
     toast.success("User deleted successfully!");
   };
@@ -190,18 +190,18 @@ function UsersTable() {
       />
       <DataTable
         columns={columns}
-        data={users?.data}
-        pagination={users?.pagination}
+        data={notes?.data}
+        pagination={notes?.pagination}
         page={page}
         onChangePage={setPage}
         perPage={perPage}
         isLoading={isLoading}
         onSearchDebounced={onSearchDebounced}
-        inputPlaceholder="Search by username, email..."
+        inputPlaceholder="Search by title, description..."
         onClickFilter={on}
       />
     </>
   );
 }
 
-export default UsersTable;
+export default NotesTable;

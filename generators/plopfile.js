@@ -4,7 +4,7 @@ module.exports = function (plop) {
     prompts: [
       {
         type: "input",
-        name: "name",
+        title: "name",
         message: "Enter your component name:",
       },
     ],
@@ -32,7 +32,7 @@ module.exports = function (plop) {
     prompts: [
       {
         type: "input",
-        name: "name",
+        title: "name",
         message: "Enter your form name:",
       },
     ],
@@ -60,7 +60,7 @@ module.exports = function (plop) {
     prompts: [
       {
         type: "input",
-        name: "name",
+        title: "name",
         message: "Enter your page name (which will also be the url):",
       },
     ],

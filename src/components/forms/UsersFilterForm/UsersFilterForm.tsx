@@ -35,7 +35,7 @@ const UsersFilterForm: ForwardRefRenderFunction<UsersFilterFormRef, Props> = (
   ref
 ) => {
   const computedDefaultValues = {
-    email: "",
+    description: "",
     ...defaultValues,
   };
   const {

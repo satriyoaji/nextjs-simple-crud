@@ -1,19 +1,19 @@
-import UsersTable from "@/components/tables/UsersTable";
+import NotesTable from "@/components/tables/UsersTable";
 import PrivatePage from "@/layouts/PrivatePage";
 import { Container } from "@chakra-ui/react";
 import React, { ReactElement } from "react";
 import { NextPageWithLayout } from "../_app";
 
-const Users: NextPageWithLayout = () => {
+const Notes: NextPageWithLayout = () => {
   return (
     <Container maxWidth="1400px" m="auto" py={10}>
-      <UsersTable />
+      <NotesTable />
     </Container>
   );
 };
 
-Users.getLayout = function getLayout(page: ReactElement) {
-  return <PrivatePage title="Users">{page}</PrivatePage>;
+Notes.getLayout = function getLayout(page: ReactElement) {
+  return <PrivatePage title="Notes">{page}</PrivatePage>;
 };
 
-export default Users;
+export default Notes;

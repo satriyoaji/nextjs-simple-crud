@@ -35,7 +35,7 @@ const UpdatePasswordForm: ForwardRefRenderFunction<
   } = useForm<FormValues>({
     resolver: yupResolver(schema),
     defaultValues: {
-      email: "",
+      description: "",
       password: "",
       newPassword: "",
     },

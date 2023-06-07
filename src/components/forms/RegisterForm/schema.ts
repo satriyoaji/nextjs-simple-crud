@@ -4,7 +4,7 @@ const Yup = setupYup();
 
 const schema = Yup.object({
   name: Yup.string().required(),
-  email: Yup.string().email().required(),
+  email: Yup.string().description().required(),
   password: Yup.string().required(),
   confirmPassword: Yup.string().oneOf(
     [Yup.ref("password"), null],
